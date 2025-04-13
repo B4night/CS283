@@ -34,7 +34,7 @@ def generate_sparql_query(prompt: str) -> str:
     return res
 
 
-def get_info_from_dbpedia(prompt: str) -> str:
+def get_info_from_dbpedia(prompt: str) -> dict:
     success = False
     ans = {}
     fail_count = 0
@@ -64,7 +64,7 @@ def get_info_from_dbpedia(prompt: str) -> str:
     return ans
 
 
-def get_subgraph_from_dbpedia(prompt: str) -> str:
+def get_subgraph_from_dbpedia(prompt: str) -> list:
     success = False
     ans = []
 
@@ -90,34 +90,76 @@ def get_subgraph_from_dbpedia(prompt: str) -> str:
     return ans
 
 
-def get_story(prompt: str) -> str:
-    appendix_info = "\n".join(get_subgraph_from_dbpedia(prompt=prompt))
+def generate_story_parts(prompt: str, appendix_info: list, num_parts: int = 3) -> list:
+    # Split appendix_info into `num_parts` chunks
+    chunk_size = max(1, len(appendix_info) // num_parts)
+    parts = []
 
-    completion = client.chat.completions.create(
-        model='gpt-4o',
-        messages=[
+    for i in range(num_parts):
+        chunk = appendix_info[i * chunk_size: (i + 1) * chunk_size]
+        chunk_text = "\n".join(chunk)
+        sub_prompt = f"{prompt} (Part {i+1})"
+
+        messages = [
             {
                 "role": "system",
-                "content": "Generate a story based on the prompt and additional information. Only output the story."
+                "content": "Generate a part of a story based on the prompt and additional information. Only output the story content."
             },
             {
                 "role": "user",
-                "content": prompt
+                "content": sub_prompt
             },
             {
                 "role": "user",
-                "content": appendix_info
+                "content": chunk_text
             }
         ]
+
+        completion = client.chat.completions.create(
+            model='gpt-4o',
+            messages=messages
+        )
+        res = completion.choices[0].message.content.strip().replace("```", "")
+        logger.info(f"Generated part {i+1}: {res}")
+        parts.append(res)
+
+    return parts
+
+
+def get_story(prompt: str, num_parts: int = 3) -> str:
+    appendix_info = get_subgraph_from_dbpedia(prompt)
+    parts = generate_story_parts(prompt, appendix_info, num_parts)
+    full_story = combine_story_parts(parts, prompt)
+    return full_story
+
+
+def combine_story_parts(parts: list, prompt: str) -> str:
+    combined_input = "\n\n".join(
+        [f"Part {i+1}:\n{part}" for i, part in enumerate(parts)])
+    messages = [
+        {
+            "role": "system",
+            "content": "Combine the following story parts into one coherent story. Only output the story."
+        },
+        {
+            "role": "user",
+            "content": f"Original prompt: {prompt}"
+        },
+        {
+            "role": "user",
+            "content": combined_input
+        }
+    ]
+    completion = client.chat.completions.create(
+        model='gpt-4o',
+        messages=messages
     )
-    res = completion.choices[0].message.content
-    res = res.replace("```", "")
+    res = completion.choices[0].message.content.strip().replace("```", "")
     return res
 
 
 if __name__ == "__main__":
-    # history = input("Enter the history you want to know about: ")
     history = 'France revolution'
-    prompt = f"I am intrested in the history about {history}"
-    story = get_story(prompt)
-    logger.info(f"Generated story: \n{story}")
+    prompt = f"I am interested in the history about {history}"
+    story = get_story(prompt, num_parts=3)
+    logger.info(f"Generated full story: \n{story}")
