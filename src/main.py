@@ -159,7 +159,18 @@ def combine_story_parts(parts: list, prompt: str) -> str:
 
 
 if __name__ == "__main__":
-    history = 'France revolution'
-    prompt = f"I am interested in the history about {history}"
-    story = get_story(prompt, num_parts=3)
-    logger.info(f"Generated full story: \n{story}")
+    # history = 'France revolution'
+    # prompt = f"I am interested in the history about {history}"
+    # story = get_story(prompt, num_parts=3)
+    # logger.info(f"Generated full story: \n{story}")
+
+    with open(f'../prompts/events', 'r') as f:
+        prompts = f.read().split("\n")
+
+    cnt = 0
+    for prompt in prompts:
+        question = f'Generate the story about the event: {prompt}'
+        story = get_story(question, num_parts=3)
+        with open(f'../baseline/our_method/{cnt}.txt', "w") as f:
+            f.write(story)
+        cnt += 1

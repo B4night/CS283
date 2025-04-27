@@ -1,0 +1,9 @@
+GPU Model            Used       Idle   Unavailable    Drain       Down      Maint      Total
+a100                 217          7          0         12         12          0        245
+gtx_1080_ti           29         29          0          0          0          0         58
+p100                   0         20          0          0          0          0         20
+p6000                  0          4          0          0          0          0          4
+rtx_2080_ti           24          0          0          0          0          0         24
+rtx_4090               0          0          0          0          1          0          1
+v100                 199         74          0          0          0          0        273
+       Totals:       469        134          0         12         13          0        625
