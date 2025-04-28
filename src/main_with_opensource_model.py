@@ -268,7 +268,7 @@ if __name__ == "__main__":
         prompts = f.read().split("\n")
 
     # make directory: ../baseline/{model_type}_our_method
-    os.mkdir(f'../baseline/{model_type}_our_method')
+    os.mkdir(f'../baseline/{model_type}_our_method', exist_ok=True)
 
     model, tokenizer = load_model_and_tokenizer(model_type)
 

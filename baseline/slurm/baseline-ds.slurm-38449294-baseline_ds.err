@@ -1,0 +1,8 @@
+2025-04-28 13:55:15,149 - __main__ - INFO - Loading model and tokenizer for /ibex/user/feic/pjs/model/DeepSeek-R1-Distill-Llama-8B...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:06<00:06,  6.34s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:11<00:00,  5.69s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:11<00:00,  5.79s/it]
+Traceback (most recent call last):
+  File "/ibex/user/feic/pjs/cs283/CS283/baseline/open_source_model.py", line 113, in <module>
+    main()
+  File "/ibex/user/feic/pjs/cs283/CS283/baseline/open_source_model.py", line 102, in main
+    os.mkdir(f'./{model_type}')
+FileExistsError: [Errno 17] File exists: './ds-8b'

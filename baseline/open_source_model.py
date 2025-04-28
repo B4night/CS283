@@ -99,7 +99,7 @@ def main():
     with open("../prompts/events", "r") as f:
         prompts = f.read().split("\n")
 
-    os.mkdir(f'./{model_type}')
+    os.makedirs(f'./{model_type}', exist_ok=True)
 
     for prompt in prompts:
         question = f'Generate the story about the event: {prompt}'
