@@ -76,28 +76,46 @@ def get_score(prompt: str) -> str:
 
 
 if __name__ == "__main__":
-    baseline_stories = []
-    for file in os.listdir('./pure_gpt_4o'):
-        with open(f'./pure_gpt_4o/{file}', 'r') as f:
-            story = f.read()
-            response = get_score(story)
-            baseline_stories.append(story)
-        with open(f'./pure_gpt_4o/{file}.score', 'w') as f:
-            f.write(response)
-        # break
+    dirs = ['ds-8b', 'llama', 'qwen']
+    
+    
+    for dire in dirs:
+        sub_dirs = os.listdir(f'{dire}')
+        
+        baseline_dir = sub_dirs[0] if len(sub_dirs[0]) > len(sub_dirs[1]) else sub_dirs[1]
+        new_dir = sub_dirs[1] if baseline_dir == sub_dirs[0] else sub_dirs[0]
+        
+        baseline_dir = f'./{dire}/{baseline_dir}'
+        new_dir = f'./{dire}/{new_dir}'
+        
+        baseline_stories = []
+        for file in os.listdir(f'{baseline_dir}'):
+            with open(f'{baseline_dir}/{file}', 'r') as f:
+                story = f.read()
+                if story == "":
+                    continue
+                response = get_score(story)
+                baseline_stories.append(story)
+            with open(f'{baseline_dir}/{file}.score', 'w') as f:
+                f.write(response)
+            break
 
-    evaluate_distinct(baseline_stories)
-    calculate_perplexity(baseline_stories)
+        print(f'Metrics for {baseline_dir}')
+        evaluate_distinct(baseline_stories)
+        calculate_perplexity(baseline_stories)
 
-    new_stories = []
-    for file in os.listdir('./our_method'):
-        with open(f'./our_method/{file}', 'r') as f:
-            story = f.read()
-            response = get_score(story)
-            new_stories.append(story)
-        with open(f'./our_method/{file}.score', 'w') as f:
-            f.write(response)
-        # break
+        new_stories = []
+        for file in os.listdir(f'{new_dir}'):
+            with open(f'{new_dir}/{file}', 'r') as f:
+                story = f.read()
+                if story == "":
+                    continue
+                response = get_score(story)
+                new_stories.append(story)
+            with open(f'{new_dir}/{file}.score', 'w') as f:
+                f.write(response)
+            break
 
-    evaluate_distinct(new_stories)
-    calculate_perplexity(new_stories)
+        print(f'Metrics for {new_dir}')
+        evaluate_distinct(new_stories)
+        calculate_perplexity(new_stories)
