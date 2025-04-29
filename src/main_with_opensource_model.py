@@ -19,9 +19,9 @@ sparql = SPARQLWrapper("http://dbpedia.org/sparql")
 # Dictionary mapping model types to their HuggingFace model IDs
 MODEL_MAPPINGS = {
     "gpt": "gpt-4o",  # This will still use OpenAI's API
-    "ds-8b": "/ibex/user/feic/pjs/model/DeepSeek-R1-Distill-Llama-8B",
-    "llama-3.1-8b": "/ibex/user/feic/pjs/model/Llama-3.1-8B-Instruct",
-    "qwen2.5-7b": "/ibex/user/feic/pjs/model/Qwen2.5-7B-Instruct-1M"
+    "ds-8b": "/home/feic/pjs/model/DeepSeek-R1-Distill-Llama-8B",
+    "llama-3-8b": "/home/feic/pjs/model/Meta-Llama-3-8B-Instruct",
+    "qwen2.5-7b": "/home/feic/pjs/model/Qwen2.5-7B"
     # Add more models as needed
 }
 
@@ -268,7 +268,7 @@ if __name__ == "__main__":
         prompts = f.read().split("\n")
 
     # make directory: ../baseline/{model_type}_our_method
-    os.mkdir(f'../baseline/{model_type}_our_method', exist_ok=True)
+    os.makedirs(f'../baseline/{model_type}_our_method', exist_ok=True)
 
     model, tokenizer = load_model_and_tokenizer(model_type)
 

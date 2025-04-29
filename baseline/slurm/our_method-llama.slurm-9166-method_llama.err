@@ -1,0 +1,5 @@
+/home/feic/miniforge3/envs/open_r1/lib/python3.11/site-packages/transformers/utils/hub.py:106: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+usage: main_with_opensource_model.py [-h]
+                                     [--model {gpt,ds-8b,llama-3-8b,qwen2.5-7b}]
+main_with_opensource_model.py: error: argument --model: invalid choice: 'llama-3.1-8b' (choose from 'gpt', 'ds-8b', 'llama-3-8b', 'qwen2.5-7b')

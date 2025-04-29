@@ -1,0 +1,93 @@
+GPU Model        Used    Idle   Drain    Down   Maint   Total
+a100               11       5       0       0       0      16
+p100                1       5       0       1       0       7
+v100               10       6       0       8       0      24
+       Totals:     22      16       0       9       0      47
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 20: syntax error at \'LIMIT\' before \'10\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbr: <http://dbpedia.org/resource/>\n\nSELECT ?city ?cityLabel ?formationDate ?abstract\nWHERE {\n  ?city dbo:formation ?formationDate ;\n        dbo:location dbr:Mesopotamia ;\n        dbo:abstract ?abstract .\n  FILTER(lang(?abstract) = "en")\n  ?city rdfs:label ?cityLabel .\n  FILTER(lang(?cityLabel) = "en")\n  FILTER(?formationDate <= "3000-01-01"^^xsd:dateTime)\n}\nORDER BY ASC(?formationDate)\nLIMIT 10\n\n\nLIMIT 10\n'
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 16: syntax error at \'LIMIT\' before \'10\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbp: <http://dbpedia.org/property/>\nPREFIX dbr: <http://dbpedia.org/resource/>\n\nSELECT ?city ?description ?formationDate WHERE {\n  ?city dbo:location dbr:Mesopotamia .\n  ?city dbo:abstract ?description .\n  ?city dbo:formationYear ?formationDate .\n  FILTER (lang(?description) = "en")\n}\nORDER BY ASC(?formationDate)\nLIMIT 10\n\nLIMIT 10\n'
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 18: syntax error at \'LIMIT\' before \'10\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbp: <http://dbpedia.org/property/>\n\nSELECT ?city ?description ?formationYear ?location\nWHERE {\n  ?city rdf:type dbo:Settlement ;\n        dbo:formationYear ?formationYear ;\n        dbo:location ?location ;\n        dbo:abstract ?description .\n  FILTER (CONTAINS(LCASE(STR(?description)), "mesopotamia"))\n  FILTER (lang(?description) = "en")\n}\nORDER BY ?formationYear\nLIMIT 10\n\nLIMIT 10\n'
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 19: syntax error at 'LIMIT' before '10'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbr: <http://dbpedia.org/resource/>\nPREFIX dbp: <http://dbpedia.org/property/>\n\nSELECT ?city ?cityDescription ?event ?eventDescription WHERE {\n  VALUES ?event {dbr:Urbanization_of_Sumer}\n  \n  ?event dbo:abstract ?eventDescription.\n  FILTER (lang(?eventDescription) = 'en')\n\n  ?city dbo:wikiPageWikiLink ?event;\n        dbo:abstract ?cityDescription.\n  FILTER (lang(?cityDescription) = 'en')\n}\nLIMIT 10\n\nLIMIT 10\n"
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 17: syntax error at \'LIMIT\' before \'10\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbp: <http://dbpedia.org/property/>\nPREFIX dbr: <http://dbpedia.org/resource/>\n\nSELECT ?city ?description ?date\nWHERE {\n  ?city dbo:location dbr:Mesopotamia ;\n        dbo:abstract ?description ;\n        dbo:formationDate ?date .\n  FILTER (lang(?description) = "en")\n}\nORDER BY ASC(?date)\nLIMIT 10\n\nLIMIT 10\n'
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 18: syntax error at \'LIMIT\' before \'10\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbr: <http://dbpedia.org/resource/>\n\nSELECT ?event ?description ?date ?location ?builder \nWHERE {\n  ?event dbo:wikiPageID ?id ;\n         dbo:abstract ?description ;\n         dbo:date ?date ;\n         dbo:place ?location ;\n         dbo:builder ?builder .\n  FILTER CONTAINS(LCASE(STR(?event)), "great_wall_of_china_construction").\n  FILTER (LANG(?description) = "en")\n}\nLIMIT 1\n\nLIMIT 10\n'
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 18: syntax error at \'LIMIT\' before \'10\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbr: <http://dbpedia.org/resource/>\nPREFIX dbp: <http://dbpedia.org/property/>\n\nSELECT ?event ?description ?startTime ?place\nWHERE {\n  ?event dbo:wikiPageWikiLink dbr:Alexander_the_Great ;\n         rdf:type dbo:Event ;\n         dbp:caption ?description ;\n         dbo:date ?startTime ;\n         dbo:place ?place .\n  FILTER (CONTAINS(LCASE(?description), "begins his conquests"))\n}\nLIMIT 1\n\nLIMIT 10\n'
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 17: syntax error at \'LIMIT\' before \'10\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbp: <http://dbpedia.org/property/>\nPREFIX dbr: <http://dbpedia.org/resource/>\n\nSELECT ?eventDescription ?date ?place\nWHERE {\n  dbr:Alexander_the_Great dbo:knownFor ?event .\n  ?event dbo:abstract ?eventDescription ;\n         dbp:date ?date ;\n         dbp:place ?place .\n  FILTER (lang(?eventDescription) = "en")\n}\nLIMIT 1\n\nLIMIT 10\n'
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 0: End-of-line in a short single-quoted string at \'\'s_Civil_War dbo:abstract ?abstract.\n\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbp: <http://dbpedia.org/property/>\nPREFIX dbr: <http://dbpedia.org/resource/>\n\nSELECT ?abstract\nWHERE {\n  dbr:Caesar\'s_Civil_War dbo:abstract ?abstract.\n  FILTER (lang(?abstract) = "en")\n}\n\nLIMIT 10\n'
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 11: Undefined namespace prefix in prefix:localpart notation at \'dct:subject\' before \'?event\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbr: <http://dbpedia.org/resource/>\nPREFIX dbp: <http://dbpedia.org/property/>\n\nSELECT ?event ?eventDate ?description ?relatedPerson\nWHERE {\n  dbr:Division_of_the_Roman_Empire dbo:abstract ?description ;\n                                    dbo:date ?eventDate ;\n                                    dct:subject ?event .\n  OPTIONAL { dbr:Diocletian dbp:successor ?relatedPerson }\n  FILTER (LANG(?description) = "en")\n}\nLIMIT 10\n\nLIMIT 10\n'
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 15: syntax error at \'LIMIT\' before \'10\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbr: <http://dbpedia.org/resource/>\nPREFIX dbp: <http://dbpedia.org/property/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT ?event ?eventDescription\nWHERE {\n  dbr:Viking_Age dbo:abstract ?eventDescription .\n  FILTER (LANG(?eventDescription) = "en")\n}\nLIMIT 1\n\nLIMIT 10\n'
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 8: syntax error at '1258' before ')'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbpedia-owl: <http://dbpedia.org/ontology/>\nPREFIX dbpprop: <http://dbpedia.org/property/>\nPREFIX dbr: <http://dbpedia.org/resource/>\n\nSELECT ?abstract WHERE {\n  dbr:Battle_of_Baghdad_(1258) dbpedia-owl:abstract ?abstract .\n  FILTER (lang(?abstract) = 'en')\n}\n\nLIMIT 10\n"
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 4: syntax error at '1258' before ')'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nSELECT ?abstract WHERE {\n  dbr:Battle_of_Baghdad_(1258) dbo:abstract ?abstract .\n  FILTER (lang(?abstract) = 'en')\n}\n\nLIMIT 10\n"
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 9: syntax error at \'?event\' before \'dbo:abstract\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbr: <http://dbpedia.org/resource/>\n\nSELECT ?event ?description ?date ?location ?relevantPerson ?outcome\nWHERE {\n  ?event dbo:wikiPageID 245912.\n  ?event dbo:abstract ?description;\n         dbo:date ?date;\n         dbo:place ?location;\n         dbo:commander ?relevantPerson;\n         dbo:result ?outcome.\n  FILTER (lang(?description) = "en")\n}\n\nLIMIT 10\n'
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: End-of-line in a short single-quoted string at ''s_first_telescopic_observations dbo:abstract ?abstract.\n'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbr: <http://dbpedia.org/resource/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT ?abstract\nWHERE {\n  dbr:Galileo's_first_telescopic_observations dbo:abstract ?abstract.\n  FILTER (lang(?abstract) = 'en')\n}\n\nLIMIT 10\n"
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 14: syntax error at \'LIMIT\' before \'10\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbr: <http://dbpedia.org/resource/>\n\nSELECT ?event ?description WHERE {\n  ?event dbo:wikiPageWikiLink dbr:Galileo_Galilei ;\n         dbo:wikiPageWikiLink dbr:Telescope ;\n         dbo:abstract ?description .\n  FILTER (lang(?description) = "en")\n}\nLIMIT 1\n\nLIMIT 10\n'
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 12: syntax error at \'LIMIT\' before \'10\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nSELECT ?event ?description ?date WHERE {\n  ?event rdf:type dbo:Event ;\n         rdfs:label "Abolition of slavery in the British Empire"@en ;\n         dbo:abstract ?description ;\n         dbp:date ?date .\n  FILTER (lang(?description) = \'en\')\n}\nLIMIT 1\n\nLIMIT 10\n'
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 18: syntax error at \'LIMIT\' before \'10\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbp: <http://dbpedia.org/property/>\nPREFIX dbr: <http://dbpedia.org/resource/>\n\nSELECT ?event ?description ?date ?location ?outcome\nWHERE {\n  ?event dbo:wikiPageWikiLink dbr:Opium_Wars ;\n         dbo:abstract ?description ;\n         dbo:date ?date ;\n         dbo:place ?location ;\n         dbp:result ?outcome .\n  FILTER (lang(?description) = "en")\n}\nLIMIT 10\n\nLIMIT 10\n'
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 4: Undefined namespace prefix in prefix:localpart notation at \'wd:Q11918\' before \'dbo:abstract\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nSELECT ?abstract WHERE {\n  wd:Q11918 dbo:abstract ?abstract.\n  FILTER (lang(?abstract) = "en")\n}\n\nLIMIT 10\n'
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 17: syntax error at \'LIMIT\' before \'10\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbp: <http://dbpedia.org/property/>\nPREFIX dbr: <http://dbpedia.org/resource/>\n\nSELECT ?name ?date ?location ?description\nWHERE {\n  dbr:Assassination_of_John_F._Kennedy dbo:wikiPageWikiLink ?name .\n  dbr:Assassination_of_John_F._Kennedy dbp:date ?date .\n  dbr:Assassination_of_John_F._Kennedy dbp:location ?location .\n  dbr:Assassination_of_John_F._Kennedy dbo:abstract ?description .\n  FILTER (lang(?description) = "en")\n}\nLIMIT 1\n\nLIMIT 10\n'
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Bad character '\xe2' (0xe2) in SPARQL expression at '\xe2'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbr: <http://dbpedia.org/resource/>\n\nSELECT ?event ?startDate ?description WHERE {\n  dbr:War_in_Afghanistan_(2001\xe2\x80\x93present) dbo:abstract ?description ;\n                                          dbo:activeYearsStartYear ?startDate .\n  BIND(dbr:War_in_Afghanistan_(2001\xe2\x80\x93present) AS ?event)\n  FILTER (lang(?description) = 'en')\n}\n\nLIMIT 10\n"
+Query failed, retrying... Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Bad character \'\xe2\' (0xe2) in SPARQL expression at \'\xe2\'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n\nPREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbr: <http://dbpedia.org/resource/>\n\nSELECT ?abstract\nWHERE {\n  dbr:War_in_Afghanistan (2001\xe2\x80\x932021) dbo:abstract ?abstract .\n  FILTER (lang(?abstract) = "en")\n}\n\nLIMIT 10\n'

@@ -4,7 +4,6 @@ import argparse
 import torch
 from openai import OpenAI
 from dotenv import load_dotenv, find_dotenv
-from SPARQLWrapper import SPARQLWrapper, JSON
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 load_dotenv(find_dotenv())
@@ -17,9 +16,9 @@ logging.basicConfig(level=logging.INFO,
 
 MODEL_MAPPINGS = {
     "gpt": "gpt-4o",  # This will still use OpenAI's API
-    "ds-8b": "/ibex/user/feic/pjs/model/DeepSeek-R1-Distill-Llama-8B",
-    "llama-3.1-8b": "/ibex/user/feic/pjs/model/Llama-3.1-8B-Instruct",
-    "qwen2.5-7b": "/ibex/user/feic/pjs/model/Qwen2.5-7B-Instruct-1M"
+    "ds-8b": "/home/feic/pjs/model/DeepSeek-R1-Distill-Llama-8B",
+    "llama-3-8b": "/home/feic/pjs/model/Meta-Llama-3-8B-Instruct",
+    "qwen2.5-7b": "/home/feic/pjs/model/Qwen2.5-7B"
     # Add more models as needed
 }
 

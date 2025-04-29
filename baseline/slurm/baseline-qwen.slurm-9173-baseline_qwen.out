@@ -1,0 +1,5 @@
+GPU Model        Used    Idle   Drain    Down   Maint   Total
+a100               10       6       0       0       0      16
+p100                0       6       0       1       0       7
+v100               16       0       0       8       0      24
+       Totals:     26      12       0       9       0      47

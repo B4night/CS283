@@ -8,4 +8,4 @@
 
 conda activate open_r1
 cd ../../src
-python main_with_opensource_model.py --model=llama-3.1-8b
+python main_with_opensource_model.py --model=llama-3-8b

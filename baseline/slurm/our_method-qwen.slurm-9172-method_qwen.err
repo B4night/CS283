@@ -1,0 +1,2442 @@
+/home/feic/miniforge3/envs/open_r1/lib/python3.11/site-packages/transformers/utils/hub.py:106: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2025-04-28 14:31:54,495 - __main__ - INFO - Using model type: qwen2.5-7b for story generation
+2025-04-28 14:31:54,496 - __main__ - INFO - Loading model and tokenizer for /home/feic/pjs/model/Qwen2.5-7B...
+Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:35<01:47, 35.70s/it]Loading checkpoint shards:  50%|█████     | 2/4 [01:10<01:10, 35.28s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:45<00:35, 35.15s/it]Loading checkpoint shards: 100%|██████████| 4/4 [02:17<00:00, 33.94s/it]Loading checkpoint shards: 100%|██████████| 4/4 [02:17<00:00, 34.44s/it]
+2025-04-28 14:34:17,936 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:34:17,955 - __main__ - INFO - Generated SPARQL query: 
+SELECT ?event ?description
+WHERE {
+  ?event rdf:type dbo:Event ;
+         dbo:abstract ?description ;
+         dbo:location dbr:Mesopotamia ;
+         dbp:epoch "Ancient"@en .
+  FILTER (CONTAINS(LCASE(STR(?description)), "first cities"))
+  FILTER (lang(?description) = "en")
+}
+LIMIT 1
+
+LIMIT 10
+2025-04-28 14:34:22,151 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:34:22,154 - __main__ - INFO - Generated SPARQL query: 
+SELECT ?event ?description ?location ?date 
+WHERE {
+  ?event dbo:wikiPageID ?id ;
+         dbo:abstract ?description ;
+         dbo:location ?location ;
+         dbo:date ?date .
+  FILTER (lang(?description) = "en")
+  FILTER (CONTAINS(LCASE(?description), "formation of the first cities in mesopotamia"))
+}
+LIMIT 1
+
+LIMIT 10
+2025-04-28 14:34:26,389 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:34:26,395 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?city ?description
+WHERE {
+  ?city dbo:region dbr:Mesopotamia ;
+        dbo:formationDate ?date ;
+        dbo:abstract ?description .
+  FILTER (lang(?description) = 'en')
+  FILTER (?date < "2000-01-01"^^xsd:date) 
+}
+ORDER BY ?date
+LIMIT 10
+
+LIMIT 10
+2025-04-28 14:34:30,322 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:34:30,326 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?city ?cityLabel ?formationDate ?description
+WHERE {
+  ?city dbo:region dbr:Mesopotamia ;
+        dbo:formationDate ?formationDate ;
+        dbo:abstract ?description .
+  FILTER (lang(?description) = 'en')
+  
+  SERVICE <http://dbpedia.org/sparql> {
+    ?city rdfs:label ?cityLabel .
+    FILTER (lang(?cityLabel) = 'en')
+  }
+}
+ORDER BY ?formationDate
+LIMIT 10
+
+LIMIT 10
+2025-04-28 14:34:34,023 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:34:34,025 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?city ?description ?location ?foundingDate WHERE {
+  ?city dbo:wikiPageWikiLink dbr:Mesopotamia ;
+        dbo:abstract ?description ;
+        dbo:location ?location ;
+        dbo:foundingDate ?foundingDate .
+  FILTER (LANG(?description) = 'en')
+}
+ORDER BY ASC(?foundingDate)
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:35:10,132 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In the vast expanse of Mesopotamia, the fertile crescent between the Tigris and Euphrates rivers, th...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:35:10,524 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:36:02,730 - __main__ - INFO - Generated part 3 using qwen2.5-7b: Once upon a time, in the bustling city of London, there was a remarkable event that took place on Ja...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:36:05,835 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:36:05,846 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?event ?description ?date ?location ?builder
+WHERE {
+  dbr:Great_Pyramid_of_Giza dbo:abstract ?description;
+                               dbo:completionDate ?date;
+                               dbo:location ?location;
+                               dbo:builder ?builder.
+  FILTER (lang(?description) = "en")
+}
+LIMIT 1
+
+LIMIT 10
+2025-04-28 14:36:09,201 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:36:09,212 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Great_Pyramid_of_Giza dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:36:41,752 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In the heart of ancient Egypt, on the banks of the mighty Nile, a remarkable spectacle unfolded. The...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:36:41,810 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:37:34,057 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The construction of the Great Pyramids of Giza was a monumental task that required immense resources...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:37:36,363 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:37:36,373 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?event ?description
+WHERE {
+  dbr:Code_of_Hammurabi dbo:abstract ?description ;
+                        rdfs:label ?event.
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:37:38,181 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:37:38,507 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:37:57,553 - __main__ - INFO - Generated part 3 using qwen2.5-7b: In the ancient city of Babylon, under the reign of Hammurabi, the mighty king issued his Code of Law...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:37:59,398 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:37:59,404 - __main__ - INFO - Generated SPARQL query: 
+SELECT ?abstract
+WHERE {
+  dbr:Trojan_War dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:38:53,161 - __main__ - INFO - Generated part 1 using qwen2.5-7b: As the war raged on, the Achaeans, led by their king Agamemnon, grew frustrated with their inability...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:38:53,217 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:39:08,504 - __main__ - INFO - Generated part 3 using qwen2.5-7b: In the midst of the Trojan War, a young Trojan prince named Hector became a symbol of resistance aga...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:39:10,665 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:39:10,685 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?abstract WHERE {
+  dbr:Founding_of_Rome dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:39:11,862 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:39:11,926 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:39:11,987 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:39:19,905 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:39:19,910 - __main__ - INFO - Generated SPARQL query: 
+SELECT ?abstract WHERE {
+  dbr:776_BC_Olympics dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:39:26,995 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In ancient Greece, the first Olympic Games were held in Olympia, a sacred site where athletes from a...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:39:35,573 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The first Olympic Games in Greece took place in 776 BC and were held in the city of Olympia. The gam...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:40:27,661 - __main__ - INFO - Generated part 3 using qwen2.5-7b: In the year 776 BCE, the city of Olympia in Greece was the site of the first Olympic Games. These ga...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:40:29,809 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:40:29,811 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Great_Wall_of_China dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:40:31,671 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:40:57,869 - __main__ - INFO - Generated part 2 using qwen2.5-7b: Once upon a time, in the vast expanse of the ancient Chinese empire, a colossal project was undertak...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:41:14,780 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The story continues: 
+
+In the Part 3 of the story about the construction of the Great Wall of China,...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:41:17,524 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:41:17,542 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?description
+WHERE {
+  dbr:Democracy dbo:abstract ?description .
+  FILTER (lang(?description) = 'en')
+  ?event dbo:wikiPageWikiLink dbr:Athenian_democracy .
+  ?event dbo:abstract ?eventDescription .
+  FILTER (lang(?eventDescription) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:41:19,598 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:41:20,011 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:41:20,416 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:41:22,209 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:41:22,221 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?eventDescription WHERE {
+  dbr:Alexander_the_Great dbo:abstract ?eventDescription .
+  FILTER (lang(?eventDescription) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:41:23,508 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:41:37,747 - __main__ - INFO - Generated part 2 using qwen2.5-7b: Alexander the Great begins his conquests. (Part 2)
+
+As Alexander the Great continued his conquests, ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:41:58,662 - __main__ - INFO - Generated part 3 using qwen2.5-7b: Alexander the Great's conquests were a series of military campaigns that established the largest emp...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:42:01,647 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:42:01,651 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?description ?date ?place ?cause 
+WHERE {
+  dbr:Death_of_Alexander_the_Great dbo:abstract ?description;
+                                      dbo:date ?date;
+                                      dbo:place ?place;
+                                      dbo:causeOfDeath ?cause.
+  FILTER (lang(?description) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:42:55,050 - __main__ - INFO - Generated part 1 using qwen2.5-7b: As Alexander lay there, he felt a sense of sadness and loss wash over him. He knew that his time was...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:43:14,867 - __main__ - INFO - Generated part 2 using qwen2.5-7b: Part 2: The Death of Alexander the Great
+
+Alexander the Great's death marked the end of an era. His ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:43:14,920 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:43:17,197 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:43:17,207 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Punic_Wars dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:43:45,880 - __main__ - INFO - Generated part 1 using qwen2.5-7b: The Punic Wars were a series of wars between 264 and 146 BC fought between Rome and Carthage. The Fi...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:43:45,934 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:43:55,173 - __main__ - INFO - Generated part 3 using qwen2.5-7b: In the aftermath of the Second Punic War, Rome emerged as the dominant power in the Western Mediterr...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:44:24,321 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:44:24,323 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+SELECT ?abstract WHERE {
+  dbr:Rubicon_Crossing dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:44:42,260 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Julius Caesar had been serving as a governor of Gaul, a region spanning modern-day France, Belgium, ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:44:42,313 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:44:55,885 - __main__ - INFO - Generated part 3 using qwen2.5-7b: Caesar had now reached the Rubicon, the small river marking the boundary between Cisalpine Gaul and ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:44:58,211 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:44:58,213 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?event ?description
+WHERE {
+  dbr:Assassination_of_Julius_Caesar dbo:abstract ?description .
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:45:10,449 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Julius Caesar, the Roman dictator, was assassinated by a group of senators on the Ides of March (15 ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:45:32,850 - __main__ - INFO - Generated part 2 using qwen2.5-7b: (Part 2)
+The assassination of Julius Caesar was a pivotal moment in Roman history, one that would sh...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:45:52,242 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The assassins, led by Brutus and Cassius, were determined to put an end to Caesar's tyrannical rule....
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:46:16,150 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:46:16,152 - __main__ - INFO - Generated SPARQL query: 
+SELECT ?abstract WHERE {
+  dbr:Beginning_of_the_Roman_Empire_under_Augustus dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:46:44,062 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Once upon a time, in the heart of Italy, there was a young man named Gaius Octavius, who would later...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:47:32,476 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The people of Rome were amazed by the changes that were taking place under Augustus' leadership. The...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:47:43,106 - __main__ - INFO - Generated part 3 using qwen2.5-7b: "I will not rest until I have brought peace and stability to the empire," Augustus declared to his a...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:47:44,945 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:47:44,952 - __main__ - INFO - Generated SPARQL query: 
+SELECT ?abstract WHERE {
+  dbr:Nativity_of_Jesus dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:47:46,182 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:47:46,246 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:47:58,623 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The town of Bethlehem was bustling with activity as the night drew near. Mary and Joseph had been tr...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:48:01,289 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:48:01,294 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?event ?description WHERE {
+  dbr:Mount_Vesuvius_eruption_in_79 dbo:abstract ?description .
+  FILTER (LANG(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:48:02,516 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:48:20,128 - __main__ - INFO - Generated part 2 using qwen2.5-7b: As the day progressed, the eruption of Mount Vesuvius continued to intensify. The ash and pumice con...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:48:25,148 - __main__ - INFO - Generated part 3 using qwen2.5-7b: In the days following the eruption, the people of Pompeii struggled to find shelter and food. Many o...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:48:27,404 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:48:27,411 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?story
+WHERE {
+  dbr:Roman_Empire dbo:abstract ?story .
+  FILTER (lang(?story) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:48:28,780 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:48:44,611 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The East and West Roman Empires continued to coexist for several centuries, each with its own unique...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:48:53,540 - __main__ - INFO - Generated part 3 using qwen2.5-7b: Once upon a time, there was a powerful empire called the Roman Empire. The empire had been ruled by ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:48:57,256 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:48:57,262 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?event ?description ?date ?relatedPerson ?relatedPlace
+WHERE {
+  dbr:Edict_of_Milan dbo:abstract ?description ;
+                     dbo:date ?date ;
+                     dbo:significantPerson ?relatedPerson ;
+                     dbo:significantPlace ?relatedPlace .
+  OPTIONAL { dbr:Edict_of_Milan rdfs:label ?event . }
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:49:36,456 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Once upon a time, in the land of ancient Rome, there was a great emperor named Constantine. He ruled...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:49:36,512 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:49:36,565 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:49:38,949 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:49:38,962 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Fall_of_the_Western_Roman_Empire dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:49:40,227 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:49:40,290 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:49:51,945 - __main__ - INFO - Generated part 3 using qwen2.5-7b: In 410 AD, the Visigoths under King Alaric I sacked Rome, a devastating blow to the Western Roman Em...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:50:43,757 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:50:43,764 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Justinian_I dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:50:45,105 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:50:45,168 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:51:03,470 - __main__ - INFO - Generated part 3 using qwen2.5-7b: In the year 527 AD, a new era dawned upon the Byzantine Empire as Justinian, a young and ambitious g...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:51:05,511 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:51:05,514 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?event ?description WHERE {
+  ?event dbo:event dbr:Muhammad's_Hijra .
+  ?event dbo:abstract ?description .
+  FILTER (LANG(?description) = "en")
+}
+
+LIMIT 10
+2025-04-28 14:51:10,121 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:51:10,131 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+PREFIX dbpprop: <http://dbpedia.org/property/>
+PREFIX dbres: <http://dbpedia.org/resource/>
+
+SELECT ?event ?eventDescription ?eventDate ?relatedPeople ?relatedPeopleName WHERE {
+  ?event a dbpedia-owl:Event ;
+         dbpprop:name "Rise of Islam and Muhammad's Hijra"@en ;
+         dbpedia-owl:abstract ?eventDescription ;
+         dbpprop:date ?eventDate ;
+
+  OPTIONAL {
+    ?event dbpedia-owl:peopleInvolved ?relatedPeople .
+    ?relatedPeople dbpprop:name ?relatedPeopleName .
+  }
+  FILTER (LANG(?eventDescription) = "en")
+}
+
+LIMIT 10
+2025-04-28 14:51:14,354 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:51:14,360 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?event ?description WHERE {
+  ?event a dbo:HistoricalEvent;
+         dbp:name ?name ;
+         dbo:abstract ?description .
+  FILTER (lang(?description) = "en")
+  FILTER regex(?name, "Rise of Islam|Muhammad's Hijra", "i")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:51:46,854 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Over the next few years, Muhammad and his followers continued to expand the Islamic community, conqu...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:51:46,907 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:52:09,121 - __main__ - INFO - Generated part 3 using qwen2.5-7b: In the year 622, Muhammad's situation in Mecca had become unbearable. The polytheists had intensifie...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:52:11,524 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:52:11,527 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?abstract
+WHERE {
+  dbr:Battle_of_Tours dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:52:12,774 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:52:34,396 - __main__ - INFO - Generated part 2 using qwen2.5-7b: Once upon a time, in the year 732, a great battle took place in a small town called Tours in France....
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:52:34,450 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:52:36,651 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:52:36,667 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Coronation_of_Charlemagne dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:52:40,534 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Charlemagne, the Frankish king, was crowned as the Emperor of the Romans on Christmas Day, 800 AD, b...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:52:40,587 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:52:56,277 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The year was 800 A.D. and the world was in the midst of a time of great change. The Roman Empire had...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:52:58,919 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:52:58,928 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?description WHERE {
+  dbr:Viking_Age dbo:abstract ?description .
+  FILTER (lang(?description) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:53:09,819 - __main__ - INFO - Generated part 1 using qwen2.5-7b: The Viking Age began in the 8th century with the raids on the British Isles. The Vikings were drawn ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:53:09,873 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:53:25,037 - __main__ - INFO - Generated part 3 using qwen2.5-7b: In the year 793 AD, the world was a very different place than it is today. The people of Europe were...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:53:27,100 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:53:27,115 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Magna_Carta dbo:abstract ?abstract.
+  FILTER (LANG(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:53:47,350 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In the year 1215, King John of England was at a crossroads. His reign had been marked by conflict, b...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:54:39,521 - __main__ - INFO - Generated part 2 using qwen2.5-7b: <|system|>
+Generate a part of a story based on the prompt...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:54:58,189 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The signing of the Magna Carta was a momentous occasion in English history. It was a document that w...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:55:00,703 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:55:00,704 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Mongol_Empire dbo:abstract ?abstract .
+  dbr:Genghis_Khan dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:55:23,293 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In the year 1206, a charismatic leader named Temujin, who would later be known as Genghis Khan, unit...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:55:33,298 - __main__ - INFO - Generated part 2 using qwen2.5-7b: Genghis Khan had established a vast empire, stretching from China to Europe. He had conquered countl...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:55:44,319 - __main__ - INFO - Generated part 3 using qwen2.5-7b: Genghis Khan continued to expand the Mongol Empire, conquering new territories and forming alliances...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:55:46,961 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:55:46,970 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?comment WHERE {
+  dbr:Siege_of_Baghdad_(1258) rdfs:comment ?comment.
+  FILTER (lang(?comment) = 'en')
+}
+
+LIMIT 10
+2025-04-28 14:55:51,371 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:55:51,387 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?event ?description ?date ?location ?result ?belligerents
+WHERE {
+  dbr:Fall_of_Baghdad_(1258) dbo:abstract ?description ;
+                             dbo:date ?date ;
+                             dbo:place ?location ;
+                             dbp:result ?result ;
+                             dbo:combatant ?belligerents .
+  FILTER (LANG(?description) = "en")
+}
+
+LIMIT 10
+2025-04-28 14:55:54,431 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:55:54,450 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+SELECT ?abstract WHERE {
+  dbr:Fall_of_Baghdad_(1258) dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+2025-04-28 14:55:56,929 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:55:56,938 - __main__ - INFO - Generated SPARQL query: 
+SELECT ?abstract WHERE {
+  dbr:Siege_of_Baghdad_(1258) dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+2025-04-28 14:56:00,066 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:00,076 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Fall_of_Baghdad_(1258) dbo:abstract ?abstract .
+  FILTER(LANG(?abstract) = "en")
+}
+
+LIMIT 10
+2025-04-28 14:56:03,133 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:03,135 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Siege_of_Baghdad_(1258) dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+2025-04-28 14:56:07,076 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:07,078 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+PREFIX dbpprop: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Battle_of_Baghdad_(1258) dbpedia-owl:abstract ?abstract .
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+2025-04-28 14:56:10,309 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:10,318 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?eventDescription
+WHERE {
+  dbr:Fall_of_Baghdad_(1258) dbo:abstract ?eventDescription .
+  FILTER (lang(?eventDescription) = 'en')
+}
+
+LIMIT 10
+2025-04-28 14:56:13,808 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:13,810 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+PREFIX dbpprop: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbpedia:Fall_of_Baghdad_(1258) dbpedia-owl:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+2025-04-28 14:56:17,348 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:17,352 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Battle_of_Baghdad_(1258) dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+2025-04-28 14:56:20,076 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:20,091 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?eventDescription WHERE {
+  dbr:Battle_of_Baghdad_(1258) dbo:abstract ?eventDescription .
+  FILTER (lang(?eventDescription) = 'en')
+}
+
+LIMIT 10
+2025-04-28 14:56:23,887 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:23,891 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?abstract WHERE {
+  dbr:Fall_of_Baghdad_(1258) dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+2025-04-28 14:56:28,403 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:28,410 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?abstract WHERE {
+  dbr:Battle_of_Baghdad_(1258) dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+2025-04-28 14:56:31,677 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:31,689 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Fall_of_Baghdad_(1258) dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+2025-04-28 14:56:35,784 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:35,786 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Fall_of_Baghdad_(1258) dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+2025-04-28 14:56:38,933 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:38,936 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Fall_of_Baghdad_(1258) dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+2025-04-28 14:56:43,176 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:43,185 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Fall_of_Baghdad_(1258) dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+2025-04-28 14:56:46,046 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:46,053 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Battle_of_Baghdad_(1258) dbo:abstract ?abstract .
+  FILTER(lang(?abstract) = "en")
+}
+
+LIMIT 10
+2025-04-28 14:56:49,303 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:49,307 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?description WHERE {
+  dbr:Fall_of_Baghdad_(1258) dbo:abstract ?description .
+  FILTER (lang(?description) = 'en')
+}
+
+LIMIT 10
+2025-04-28 14:56:52,394 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:52,401 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Siege_of_Baghdad_(1258) dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+2025-04-28 14:56:55,310 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:55,321 - __main__ - INFO - Generated SPARQL query: 
+SELECT ?abstract WHERE {
+  dbr:Battle_of_Baghdad_(1258) dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+2025-04-28 14:56:59,118 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:56:59,120 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?abstract WHERE {
+  dbr:Siege_of_Baghdad_(1258) dbo:abstract ?abstract .
+  FILTER (LANG(?abstract) = 'en')
+}
+
+LIMIT 10
+2025-04-28 14:57:02,576 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:57:02,583 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+PREFIX dbpprop: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Siege_of_Baghdad_(1258) dbpedia-owl:abstract ?abstract.
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+2025-04-28 14:57:06,851 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:57:06,854 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Falls_of_Baghdad_to_the_Mongols dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:57:32,045 - __main__ - INFO - Generated part 1 using qwen2.5-7b: The year was 1258, and the city of Baghdad was under siege. The Mongols, led by Hulagu Khan, had ama...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:58:24,280 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The fall of Baghdad to the Mongols was a defining moment in the history of the Middle East. The city...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:58:24,335 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:58:27,326 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:58:27,337 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?event ?description WHERE {
+  ?event dbo:wikiPageWikiLink dbr:Marco_Polo .
+  ?event dbo:wikiPageWikiLink dbr:China .
+  ?event dbo:abstract ?description .
+  FILTER (lang(?description) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:58:46,977 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Once upon a time, in the bustling city of Quanzhou, Marco Polo, the famous Italian explorer, found h...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:59:05,540 - __main__ - INFO - Generated part 2 using qwen2.5-7b: In the year 1271, Marco Polo set out on a journey to China, embarking on an adventure that would cha...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:59:05,667 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:59:09,599 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:59:09,600 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?overview ?cause ?impact ?years ?deathToll ?region 
+WHERE {
+  dbr:Black_Death dbo:abstract ?overview ;
+                   dbo:date ?years ;
+                   dbo:deathCause ?cause ;
+                   dbo:impact ?impact ;
+                   dbp:deaths ?deathToll ;
+                   dbo:location ?region .
+  FILTER(LANG(?overview) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:59:38,452 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Today, the Black Death is remembered as one of the darkest chapters in European history. It serves a...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:59:38,507 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:59:38,560 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:59:40,763 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 14:59:40,770 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Fall_of_Constantinople dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 14:59:41,965 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:00:00,006 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The news of the fall of Constantinople to the Ottomans spread like wildfire across Europe. The once-...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:00:00,059 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:00:04,273 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:00:04,274 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?event ?description ?date ?relatedPlace
+WHERE {
+  ?event dbo:wikiPageWikiLink dbr:Christopher_Columbus ;
+         dbo:wikiPageWikiLink dbr:Discovery_of_America ;
+         dbo:abstract ?description ;
+         dbo:date ?date ;
+         dbo:place ?relatedPlace .
+  FILTER (LANG(?description) = "en")
+}
+LIMIT 1
+
+LIMIT 10
+2025-04-28 15:00:09,952 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:00:09,963 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?event ?description ?date ?location ?participant WHERE {
+  ?event dbo:wikiPageID ?id .
+  FILTER(?id = 36582)  # The DBpedia page ID for Christopher Columbus's first voyage
+  ?event dbo:abstract ?description .
+  ?event dbo:date ?date .
+  ?event dbo:place ?location .
+  ?event dbo:participant ?participant .
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:00:25,038 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Christopher Columbus, a skilled and ambitious navigator from Genoa, Italy, had been searching for a ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:00:42,977 - __main__ - INFO - Generated part 2 using qwen2.5-7b: In the second part of the story about Christopher Columbus's discovery of the Americas, we find ours...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:00:43,031 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:00:45,905 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:00:45,915 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Treaty_of_Tordesillas dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:00:47,122 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:01:07,655 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The Treaty of Tordesillas, signed on June 7, 1494, was a diplomatic agreement between Spain and Port...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:01:07,709 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:01:10,963 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:01:10,968 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?description WHERE {
+  dbr:Vasco_da_Gama_Reaches_India dbo:abstract ?description.
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:02:04,480 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Vasco da Gama's arrival in India marked the beginning of a new era in European-Indian relations. The...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:02:04,535 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:02:56,611 - __main__ - INFO - Generated part 3 using qwen2.5-7b: Vasco da Gama and his crew were on the edge of their seats as they sailed through the treacherous wa...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:02:59,445 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:02:59,450 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Ninety-five_Theses dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:03:00,722 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:03:23,609 - __main__ - INFO - Generated part 2 using qwen2.5-7b: In the town of Wittenberg, Germany, Martin Luther was a priest who was concerned about the corruptio...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:03:23,663 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:03:26,071 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:03:26,077 - __main__ - INFO - Generated SPARQL query: 
+SELECT ?abstract WHERE {
+  dbr:Spanish_conquest_of_the_Aztec_Empire dbo:abstract ?abstract .
+  FILTER (LANG(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:04:19,272 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In the aftermath of the Spanish conquest of the Aztec Empire, Cortés and his men were faced with the...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:04:32,698 - __main__ - INFO - Generated part 2 using qwen2.5-7b: Once the Spanish arrived in the New World, they began to explore and conquer the land. Hernán Cortés...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:04:48,612 - __main__ - INFO - Generated part 3 using qwen2.5-7b: Hernán Cortés, a Spanish conquistador, arrived in the Aztec Empire with a small army of soldiers and...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:04:51,138 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:04:51,145 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract 
+WHERE {
+  dbr:Fall_of_the_Inca_Empire dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:05:21,806 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Once upon a time, in the heart of South America, there existed a mighty empire known as the Inca. Th...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:05:50,381 - __main__ - INFO - Generated part 2 using qwen2.5-7b: Once upon a time, in the lush and vibrant mountains of the Andes, the Inca Empire was at its peak. T...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:05:50,434 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:05:57,907 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:05:57,918 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?event ?description ?date ?place ?commander
+WHERE {
+  ?event a dbo:MilitaryConflict ;
+         dbo:name "Defeat of the Spanish Armada"@en ;
+         dbo:abstract ?description ;
+         dbo:date ?date ;
+         dbo:place ?place ;
+         dbo:commanders ?commander .
+
+  FILTER(lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:06:51,399 - __main__ - INFO - Generated part 1 using qwen2.5-7b: As the years passed, the legacy of the Defeat of the Spanish Armada by England continued to shape th...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:06:58,973 - __main__ - INFO - Generated part 2 using qwen2.5-7b: In 1588, the Spanish Armada set sail to invade England. However, they faced strong opposition from t...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:07:11,887 - __main__ - INFO - Generated part 3 using qwen2.5-7b: As the Spanish Armada sailed closer to England, the English navy, led by Sir Francis Drake, was read...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:07:14,274 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:07:14,277 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Galileo_Galilei dbo:abstract ?abstract .
+  FILTER (LANG(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:07:40,384 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In the early 1600s, the Italian astronomer and physicist Galileo Galilei made some of the most groun...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:07:52,732 - __main__ - INFO - Generated part 2 using qwen2.5-7b: Galileo continued to observe the sky with his telescope, and he made many new discoveries. He observ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:08:21,097 - __main__ - INFO - Generated part 3 using qwen2.5-7b: Galileo's discoveries had a profound impact on the scientific community and the world at large. His ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:08:24,235 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:08:24,244 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Mayflower_Pilgrims dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:08:33,874 - __main__ - INFO - Generated part 1 using qwen2.5-7b: The Mayflower Pilgrims landed at Plymouth on November 11, 1620. They had traveled for over two month...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:08:33,928 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:08:38,852 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The Mayflower Pilgrims had finally reached their destination after a long and arduous journey across...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:08:42,270 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:08:42,280 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?event ?description
+WHERE {
+  dbr:English_Civil_War dbo:abstract ?description ;
+                        dbo:isPrimaryTopicOf ?event .
+  FILTER (lang(?description) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:09:35,802 - __main__ - INFO - Generated part 1 using qwen2.5-7b: And so, the people of England continue to move forward, always looking for ways to improve and to ma...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:10:14,467 - __main__ - INFO - Generated part 2 using qwen2.5-7b: In the wake of the tumultuous English Civil War, a sense of uncertainty and unease settled over the ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:10:24,213 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The English Civil War, which had been brewing for some time, finally erupted in full force. The conf...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:10:27,069 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:10:27,073 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?abstract WHERE {
+  dbr:Glorious_Revolution dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:11:20,597 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Once upon a time, in the year 1688, a great event took place in a land called England. The Glorious ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:11:46,474 - __main__ - INFO - Generated part 2 using qwen2.5-7b: In Part 1, we discussed the events leading up to the Glorious Revolution in England, including the d...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:12:07,525 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The Glorious Revolution, also known as the Bloodless Revolution, was a pivotal event in English hist...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:12:11,094 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:12:11,110 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Philosophiæ_Naturalis_Principia_Mathematica dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:12:26,640 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Isaac Newton, a brilliant scientist, had been working on a groundbreaking work for years. He had bee...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:12:26,693 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:12:26,746 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:12:28,832 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:12:28,842 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:History_of_the_United_States dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:12:30,188 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:12:49,507 - __main__ - INFO - Generated part 2 using qwen2.5-7b: In 1776, a group of American colonists declared their independence from Great Britain, marking the b...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:12:49,560 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:12:51,451 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:12:51,455 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?summary WHERE {
+  dbr:French_Revolution dbo:abstract ?summary .
+  FILTER (lang(?summary) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:13:17,405 - __main__ - INFO - Generated part 1 using qwen2.5-7b: The French Revolution was a time of great change in France. It began with the Estates General of 178...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:13:17,459 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:13:29,969 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The streets of Paris were alive with the sound of protest and the scent of change. The French Revolu...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:13:32,874 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:13:32,877 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+PREFIX dbpprop: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Execution_of_Louis_XVI dbpedia-owl:abstract ?abstract.
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:13:34,140 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:13:34,203 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:13:34,265 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:13:56,066 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:13:56,068 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?event ?abstract
+WHERE {
+  ?event dbo:wikiPageWikiLink dbr:Coronation_of_Napoleon_I_of_France .
+  ?event dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:13:57,315 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:13:57,377 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:13:57,441 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:14:40,352 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:14:40,354 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?battle ?description ?combatant ?commander ?outcome
+WHERE {
+  dbr:Battle_of_Waterloo dbo:abstract ?description ;
+                         dbo:combatant ?combatant ;
+                         dbo:commander ?commander ;
+                         dbo:outcome ?outcome .
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:14:57,711 - __main__ - INFO - Generated part 1 using qwen2.5-7b: The defeat of Napoleon marked the end of an era in European history. The French Empire was dismantle...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:14:57,765 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:14:57,818 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:15:00,253 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:15:00,258 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?abstract
+WHERE {
+  dbr:Latin_American_Wars_of_Independence dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:15:53,863 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In Part 11, we explored the lasting legacy of the Latin American Wars of Independence and the ongoin...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:16:10,501 - __main__ - INFO - Generated part 2 using qwen2.5-7b: In the early 19th century, Latin America was undergoing a period of significant political and social...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:16:10,555 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:16:12,700 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:16:12,702 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Greek_War_of_Independence dbo:abstract ?abstract.
+  FILTER(lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:16:48,057 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In the year 1821, the Greek people were oppressed under the rule of the Ottoman Empire. The Greeks h...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:16:48,110 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:17:08,787 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The Greek War of Independence had begun, and it was a long and difficult journey for the Greeks. The...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:17:31,411 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:17:31,416 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Industrial_Revolution dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:18:10,710 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In the year 1760, the world was about to undergo a significant transformation. The First Industrial ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:18:10,764 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:18:10,816 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:18:13,849 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:18:13,858 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Abolition_of_slavery_in_the_British_Empire dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:18:34,067 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In 1833, the British Empire made a historic decision to abolish slavery throughout its territories. ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:18:34,121 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:18:34,174 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:18:37,494 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:18:37,503 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?event ?description ?startDate ?endDate ?location WHERE {
+  ?event dbo:wikiPageWikiLink dbr:Opium_Wars .
+  OPTIONAL { ?event dbo:abstract ?description FILTER (lang(?description) = 'en') }
+  OPTIONAL { ?event dbo:startDate ?startDate }
+  OPTIONAL { ?event dbo:endDate ?endDate }
+  OPTIONAL { ?event dbo:location ?locationLabel }
+  OPTIONAL { ?locationLabel rdfs:label ?location FILTER (lang(?location) = 'en') }
+}
+LIMIT 1
+
+LIMIT 10
+2025-04-28 15:18:42,007 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:18:42,014 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Opium_Wars dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:19:20,761 - __main__ - INFO - Generated part 1 using qwen2.5-7b: One day, the British government decided to do something about the opium problem in China. They wante...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:19:20,815 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:19:20,868 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:19:23,326 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:19:23,330 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:European_revolutions dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:19:24,553 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:19:43,721 - __main__ - INFO - Generated part 2 using qwen2.5-7b: In the aftermath of the French Revolution, Europe was in a state of turmoil. The new revolutionary g...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:19:43,774 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:19:45,779 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:19:45,784 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?description WHERE {
+  dbr:California_Gold_Rush dbo:abstract ?description.
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:19:47,099 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:20:10,488 - __main__ - INFO - Generated part 2 using qwen2.5-7b: In the early 1800s, the United States was a young and rapidly growing nation. One of the most signif...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:20:10,543 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:20:13,623 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:20:13,628 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?event ?description ?date ?location ?keyFigures WHERE {
+  dbr:Unification_of_Italy dbo:abstract ?description ;
+                           dbo:date ?date ;
+                           dbo:location ?location ;
+                           dbo:keyFigure ?keyFigures .
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:20:14,865 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:20:33,271 - __main__ - INFO - Generated part 2 using qwen2.5-7b: In 1861, the Kingdom of Italy was officially established with Victor Emmanuel II as the first king. ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:20:33,325 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:20:35,025 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:20:35,033 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:American_Civil_War dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:20:36,333 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:20:36,396 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:20:51,362 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The American Civil War, a defining moment in the history of the United States, saw the country torn ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:20:55,613 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:20:55,614 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Emancipation_Proclamation dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:20:56,953 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:20:57,016 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:21:49,037 - __main__ - INFO - Generated part 3 using qwen2.5-7b: As he gazed out into the vast expanse of the forest, he couldn't help but feel a sense of unease. He...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:21:51,072 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:21:51,078 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:German_reunification dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:22:09,784 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Once upon a time, in the year 1989, a small hole was created in the Iron Curtain when Hungary's bord...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:22:09,838 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:22:37,815 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The unification of Germany was a historic event that transformed the political landscape of Europe. ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:22:40,919 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:22:40,931 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?date ?location ?description
+WHERE {
+  dbr:Invention_of_the_telephone dbo:date ?date ;
+                                   dbo:location ?location ;
+                                   dbo:abstract ?description .
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:22:52,368 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In the late 19th century, a Scottish-born inventor named Alexander Graham Bell was working in his la...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:23:05,811 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The year was 1876, and a young man named Alexander Graham Bell was working on an invention that woul...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:23:05,864 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:23:07,524 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:23:07,531 - __main__ - INFO - Generated SPARQL query: 
+SELECT ?abstract
+WHERE {
+  dbr:Scramble_for_Africa dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:24:00,939 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In the second part of the story, we see the effects of the Scramble for Africa on the people and cul...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:24:11,338 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The Scramble for Africa had begun, and the European powers were vying for control over the vast cont...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:24:27,037 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The Scramble for Africa had begun, and the European powers were eager to claim their share of the va...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:24:29,075 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:24:29,076 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Wright_brothers_first_flight dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:25:14,190 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In the aftermath of their historic flight, the Wright brothers continued to test and refine their ai...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:25:14,245 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:25:44,427 - __main__ - INFO - Generated part 3 using qwen2.5-7b: As they prepared for takeoff, the Wright brothers exchanged nervous glances. They knew that this was...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:25:47,037 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:25:47,043 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Sinking_of_the_RMS_Titanic dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:26:04,726 - __main__ - INFO - Generated part 1 using qwen2.5-7b: The Titanic was a grand and luxurious ship that was believed to be unsinkable, built with the latest...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:26:18,951 - __main__ - INFO - Generated part 2 using qwen2.5-7b: In the early hours of April 15th, 1912, the Titanic, a grand ocean liner, was sailing across the Nor...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:26:32,103 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The Titanic's final moments were filled with chaos and despair. The ship, which had once been a symb...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:27:26,435 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:27:26,439 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:World_War_I dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:27:27,822 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:27:27,883 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:28:07,361 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The start of World War I marked the beginning of a devastating conflict that would last for four lon...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:28:09,219 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:28:09,230 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?abstract WHERE {
+  dbr:Russian_Revolution dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:29:03,812 - __main__ - INFO - Generated part 1 using qwen2.5-7b: The Russian Revolution was a period of political and social revolution that took place in the former...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:29:43,610 - __main__ - INFO - Generated part 2 using qwen2.5-7b: Brezhnev's death in 1982 was followed by a period of political and economic stagnation known as the ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:30:00,887 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The Russian Revolution had far-reaching consequences. The Bolsheviks' rise to power marked the begin...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:30:39,227 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:30:39,258 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?event ?date ?description WHERE {
+  ?event a dbo:Event;
+         rdfs:label "Treaty of Versailles"@en;
+         dbp:date ?date;
+         dbo:abstract ?description.
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:30:45,737 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Once upon a time, in the aftermath of the devastating World War I, a group of world leaders gathered...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:30:52,879 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The Treaty of Versailles was signed on June 28, 1919, ending the First World War and establishing th...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:31:12,415 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The Treaty of Versailles, signed on June 28, 1919, marked the end of World War I and the beginning o...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:31:17,017 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:31:17,035 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?event ?description WHERE {
+  ?event dbo:abstract ?description;
+         dbo:wikiPageID dbr:Wall_Street_Crash_of_1929.
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:31:54,176 - __main__ - INFO - Generated part 1 using qwen2.5-7b: The Great Depression was a defining moment in American history, one that had a lasting impact on the...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:31:54,232 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:32:06,563 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The Stock Market Crash of 1929 had a profound impact on the United States and the world. As the stoc...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:32:09,435 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:32:09,439 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?event ?eventDate ?description
+WHERE {
+  ?event dbo:wikiPageWikiLink dbr:Adolf_Hitler ;
+         dbo:wikiPageWikiLink dbr:Chancellor_of_Germany ;
+         dbo:date ?eventDate ;
+         dbo:abstract ?description .
+  FILTER (lang(?description) = "en")
+}
+ORDER BY ?eventDate
+LIMIT 1
+
+LIMIT 10
+2025-04-28 15:32:13,996 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:32:14,000 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?event ?description
+WHERE {
+  ?event a dbo:Event ;
+         dbp:date "1933-01-30"^^xsd:date ;
+         dbo:wikiPageWikiLink dbr:Adolf_Hitler ;
+         dbo:wikiPageWikiLink dbr:Chancellor_of_Germany ;
+         dbo:abstract ?description .
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:32:30,524 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In the end, Hitler's reign as Chancellor of Germany was short-lived. His extreme policies and action...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:33:23,572 - __main__ - INFO - Generated part 2 using qwen2.5-7b: Adolf Hitler, a charismatic and ambitious politician, had been working tirelessly to gain power in G...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:33:40,016 - __main__ - INFO - Generated part 3 using qwen2.5-7b: Adolf Hitler, the charismatic leader of the Nazi Party, had been elected Chancellor of Germany on Ja...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:33:44,847 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:33:44,858 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?eventDescription ?date ?location ?belligerents ?result 
+WHERE {
+  dbr:World_War_II dbo:abstract ?eventDescription .
+  dbr:World_War_II dbp:startDate ?date .
+  dbr:World_War_II dbp:place ?location .
+  dbr:World_War_II dbp:combatant ?belligerents .
+  dbr:World_War_II dbp:result ?result .
+  FILTER (lang(?eventDescription) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:33:46,190 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:34:12,998 - __main__ - INFO - Generated part 2 using qwen2.5-7b: As the war raged on, tensions continued to rise between the Axis powers and their enemies. The Unite...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:34:13,053 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:34:15,026 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:34:15,032 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Attack_on_Pearl_Harbor dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:34:16,300 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:34:16,363 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:34:16,425 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:34:18,060 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:34:18,063 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Normandy_landings dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:34:48,463 - __main__ - INFO - Generated part 1 using qwen2.5-7b: The sun was barely rising as the Allied forces assembled on the beaches of Normandy, France, on the ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:35:02,104 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The sun was beginning to set as the Allied forces gathered on the beaches of Normandy. The sounds of...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:35:13,552 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The Allied forces, led by General Dwight D. Eisenhower, began the D-Day invasion at 6:30 a.m. on Jun...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:35:16,446 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:35:16,448 - __main__ - INFO - Generated SPARQL query: 
+SELECT ?event ?eventDescription
+WHERE {
+  ?event dbo:wikiPageID ?id ;
+         dbo:abstract ?eventDescription ;
+         dct:subject dbc:Events_in_Hiroshima,_Nagasaki,_and_the_atomic_bombings .
+  FILTER (LANG(?eventDescription) = "en")
+}
+
+LIMIT 10
+2025-04-28 15:35:26,134 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:35:26,136 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?event ?description ?date ?location ?combatant ?outcome
+WHERE {
+  ?event a dbo:MilitaryConflict ;
+         dbo:abstract ?description ;
+         dbo:date ?date ;
+         dbp:date ?date ;
+         dbo:place dbr:Hiroshima , dbr:Nagasaki ;
+         dbo:combatant ?combatant ;
+         dbp:result ?outcome .
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:35:59,039 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:35:59,099 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:35:59,160 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:36:01,912 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:36:01,919 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:United_Nations dbo:abstract ?abstract.
+  FILTER(LANG(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:36:37,711 - __main__ - INFO - Generated part 1 using qwen2.5-7b: The United Nations was founded on 24 October 1945 with the aim of preventing future world wars, succ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:36:37,766 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:36:37,819 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:36:43,729 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:36:43,732 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?event ?description ?date ?location WHERE {
+  ?event rdf:type dbo:Event;
+         dbp:name ?name;
+         dbo:abstract ?description;
+         dbo:country ?country;
+         dbo:date ?date;
+         dbo:location ?location.
+  FILTER (lang(?description) = 'en')
+  FILTER (?country = dbr:India || ?country = dbr:Pakistan)
+  FILTER (CONTAINS(LCASE(?name), "independence of india") || CONTAINS(LCASE(?name), "independence of pakistan"))
+} ORDER BY ?date
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:36:49,624 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In 1947, India and Pakistan gained their independence from British rule. This momentous event marked...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:36:49,678 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:37:08,828 - __main__ - INFO - Generated part 3 using qwen2.5-7b: Once upon a time, in the year 1947, two nations were born. India and Pakistan, two countries that we...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:37:10,909 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:37:10,921 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Establishment_of_the_State_of_Israel dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:37:34,161 - __main__ - INFO - Generated part 1 using qwen2.5-7b: The story begins with the formation of the State of Israel in 1948, following the end of World War I...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:37:52,048 - __main__ - INFO - Generated part 2 using qwen2.5-7b: Despite the ongoing conflict, the Jewish people continued to build and develop their new state, and ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:38:45,214 - __main__ - INFO - Generated part 3 using qwen2.5-7b: As the State of Israel continues to grow and develop, it faces new challenges and opportunities. One...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:39:40,126 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:39:40,140 - __main__ - INFO - Generated SPARQL query: 
+SELECT ?abstract
+WHERE {
+  dbr:Chinese_Communist_Revolution dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:40:21,126 - __main__ - INFO - Generated part 1 using qwen2.5-7b: As the People's Republic of China was established, the Chinese Communist Party implemented radical l...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:40:21,182 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:40:29,329 - __main__ - INFO - Generated part 3 using qwen2.5-7b: In 1949, Mao Zedong declared the establishment of the People's Republic of China, and the Chinese Co...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:40:32,131 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:40:32,138 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Korean_War dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:40:33,426 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:41:26,730 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The Korean War was a brutal and bloody conflict that lasted from 1950 to 1953. The war was fought be...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:41:26,786 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:41:28,935 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:41:28,944 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Cuban_Missile_Crisis dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:41:30,313 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:41:30,374 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:41:30,431 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:41:32,570 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:41:32,577 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Assassination_of_John_F._Kennedy dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:41:33,809 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:41:44,650 - __main__ - INFO - Generated part 2 using qwen2.5-7b: In the aftermath of the assassination, the country was in a state of shock and mourning. The nation'...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:41:44,703 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:41:47,218 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:41:47,219 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?abstract WHERE {
+  dbr:March_on_Washington_for_Jobs_and_Freedom dbo:abstract ?abstract .
+  FILTER (LANG(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:41:48,446 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:42:09,450 - __main__ - INFO - Generated part 2 using qwen2.5-7b: In 1963, a historic event took place in the United States that would forever change the course of hi...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:42:09,505 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:42:11,981 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:42:11,986 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?abstract
+WHERE { 
+  dbr:Moon_landing dbo:abstract ?abstract .
+  FILTER (LANG(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:42:19,026 - __main__ - INFO - Generated part 1 using qwen2.5-7b: The moon is a mysterious and fascinating place, with a rich history of exploration and discovery. Th...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:42:19,081 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:42:33,759 - __main__ - INFO - Generated part 3 using qwen2.5-7b: As the astronauts began their descent towards the lunar surface, they were filled with a mixture of ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:42:36,016 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:42:36,019 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?abstract WHERE {
+  dbr:Fall_of_Saigon dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:42:37,231 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:42:51,309 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The Fall of Saigon marked the end of the Vietnam War, but the repercussions of this event continue t...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:43:08,491 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The long and tumultuous journey of the Vietnam War finally reached its end with the Fall of Saigon. ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:43:11,073 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:43:11,079 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?event ?description ?date ?place
+WHERE {
+  ?event a dbo:Event ;
+         dbo:description ?description ;
+         dbo:date ?date ;
+         dbo:place dbr:Iran ;
+         dbo:wikiPageWikiLink dbr:Iranian_Revolution .
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:43:13,198 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:43:32,105 - __main__ - INFO - Generated part 2 using qwen2.5-7b: In the aftermath of the Iranian Revolution, the country underwent significant changes. The Shah, Moh...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:43:46,426 - __main__ - INFO - Generated part 3 using qwen2.5-7b: In the aftermath of the Iranian Revolution, a new government was established under the leadership of...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:43:48,605 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:43:48,612 - __main__ - INFO - Generated SPARQL query: 
+SELECT ?abstract WHERE {
+  dbr:Fall_of_the_Berlin_Wall dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:43:49,838 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:43:49,899 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:43:49,958 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:44:05,578 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:44:05,587 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Dissolution_of_the_Soviet_Union dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:44:06,890 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:44:06,951 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:44:07,011 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:44:08,677 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:44:08,687 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Gulf_War dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:44:10,004 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:44:10,071 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:44:10,135 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:44:41,539 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:44:41,546 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Rwandan_genocide dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:45:35,906 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Once upon a time, in a country called Rwanda, there were two groups of people living together: the H...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:46:10,528 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The Rwandan Genocide was a horrific event that took place in 1994, resulting in the deaths of an est...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:46:10,583 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:46:13,317 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:46:13,327 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?abstract WHERE {
+  dbr:Presidency_of_Nelson_Mandela dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:46:14,526 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:46:41,134 - __main__ - INFO - Generated part 2 using qwen2.5-7b: Nelson Mandela was a man of great vision and determination. He had spent decades fighting against th...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:46:46,640 - __main__ - INFO - Generated part 3 using qwen2.5-7b: Nelson Mandela's inauguration as the first black President of South Africa marked the end of aparthe...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:46:48,839 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:46:48,846 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?event ?description WHERE {
+  dbr:Handover_of_Hong_Kong dbo:abstract ?description.
+  FILTER (lang(?description) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:46:50,052 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:47:10,604 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The night of July 1, 1997, was a historic moment for Hong Kong. The city was returning to Chinese so...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:47:19,378 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The day of the handover had arrived. As the crowd gathered at the Victoria Park, the anticipation wa...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:47:22,006 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:47:22,012 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?abstract WHERE {
+  dbr:September_11_attacks dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:47:50,165 - __main__ - INFO - Generated part 1 using qwen2.5-7b: The morning of September 11, 2001, started like any other. People went about their daily routines, u...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:47:50,220 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:47:50,275 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:47:54,242 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:47:54,246 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?description ?date ?place ?combatant1 ?combatant2 ?commander1 ?commander2 WHERE {
+  dbr:War_in_Afghanistan dbo:abstract ?description ;
+                           dbo:date ?date ;
+                           dbo:place ?place ;
+                           dbp:combatant1 ?combatant1 ;
+                           dbp:combatant2 ?combatant2 ;
+                           dbp:commander1 ?commander1 ;
+                           dbp:commander2 ?commander2 .
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:48:48,772 - __main__ - INFO - Generated part 1 using qwen2.5-7b: As the war in Afghanistan continued, the coalition forces faced a number of challenges. They had to ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:48:48,827 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:49:08,176 - __main__ - INFO - Generated part 3 using qwen2.5-7b: Part 3: The War in Afghanistan Begins
+
+The war in Afghanistan began on October 7, 2001, following th...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:49:10,345 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:49:10,347 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:2003_invasion_of_Iraq dbo:abstract ?abstract.
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:50:04,787 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Once upon a time, in a land far away, there was a country named Iraq. This land had a ruler named Sa...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:50:06,984 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The Iraqi military began to mobilize their forces, and the United States and its allies began to pre...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:50:07,038 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:50:09,590 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:50:09,598 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?summary 
+WHERE { 
+  dbr:Global_Financial_Crisis dbo:abstract ?summary .
+  FILTER (lang(?summary) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:50:16,681 - __main__ - INFO - Generated part 1 using qwen2.5-7b: Once upon a time, there was a global financial crisis that affected people all over the world. The c...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:50:44,669 - __main__ - INFO - Generated part 2 using qwen2.5-7b: As the global financial crisis continued to take its toll, the world was in a state of uncertainty. ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:50:58,785 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The world came back from the brink of economic collapse through a combination of government interven...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:51:01,459 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:51:01,466 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?abstract WHERE {
+  dbr:Barack_Obama dbr:wikiPageWikiLink dbr:United_States_presidential_election,_2008 .
+  dbr:United_States_presidential_election,_2008 dbo:abstract ?abstract .
+  FILTER(lang(?abstract) = 'en')
+}
+
+LIMIT 10
+2025-04-28 15:51:04,326 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:51:04,336 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract WHERE {
+  dbr:Barack_Obama dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:51:05,656 - __main__ - INFO - Generated part 1 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:51:59,151 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The next day, millions of people gathered in front of the White House to celebrate the election of B...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:52:04,502 - __main__ - INFO - Generated part 3 using qwen2.5-7b: Barack Obama was elected as the 44th President of the United States on November 4, 2008. This histor...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:52:07,050 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:52:07,054 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?description WHERE {
+  dbr:Arab_Spring dbo:abstract ?description .
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:52:35,499 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In the heart of the Arab world, a spark ignited, setting off a chain reaction that would reshape the...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:52:35,554 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:52:49,061 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The Arab Spring uprisings began in Tunisia in December 2010. The protests were sparked by the self-i...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:52:52,344 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:52:52,353 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?event ?date ?result ?description WHERE {
+  dbr:2016_United_Kingdom_European_Union_membership_referendum dbo:abstract ?description ;
+    dbp:date ?date ;
+    dbp:result ?result .
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:53:02,414 - __main__ - INFO - Generated part 1 using qwen2.5-7b: The Brexit Referendum was a historic event that took place in the United Kingdom on June 23, 2016. T...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:53:02,468 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:53:02,529 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:53:04,376 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:53:04,380 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?description
+WHERE {
+  dbr:COVID-19_pandemic dbo:abstract ?description .
+  FILTER (lang(?description) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:53:20,025 - __main__ - INFO - Generated part 1 using qwen2.5-7b: As the world began to feel the impact of the COVID-19 pandemic, the global economy was thrown into c...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:53:37,088 - __main__ - INFO - Generated part 2 using qwen2.5-7b: As the COVID-19 pandemic raged on, the world seemed to be in a constant state of panic and uncertain...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:53:54,582 - __main__ - INFO - Generated part 3 using qwen2.5-7b: As the COVID-19 pandemic began to spread, the world was faced with a new challenge. The virus was hi...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:53:57,595 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:53:57,600 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+  dbr:Black_Lives_Matter_protests ?p ?o .
+  ?o dbo:abstract ?abstract .
+  FILTER (lang(?abstract) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:54:28,434 - __main__ - INFO - Generated part 1 using qwen2.5-7b: As the protests continued, the world watched in horror as the police brutality against Black people ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:54:49,963 - __main__ - INFO - Generated part 2 using qwen2.5-7b: As the Black Lives Matter protests continued to spread worldwide, people of all races and background...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:54:50,017 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:54:52,696 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:54:52,703 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?event ?date ?description
+WHERE {
+  dbr:Taliban dbo:activeYearsStartYear ?startYear .
+  dbr:Taliban_regains_control_of_Afghanistan dbo:date ?date ;
+                                             dbo:abstract ?description .
+  FILTER(LANG(?description) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:54:59,032 - __main__ - INFO - Generated part 1 using qwen2.5-7b: The Taliban, a militant Islamist group, has regained control of Afghanistan, after a long and bloody...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:54:59,087 - __main__ - INFO - Generated part 2 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:55:19,977 - __main__ - INFO - Generated part 3 using qwen2.5-7b: The Taliban's return to power in Afghanistan was a shocking development for the nation and the world...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:55:22,335 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:55:22,339 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?story
+WHERE {
+  dbr:Russian_invasion_of_Ukraine dbo:abstract ?story.
+  FILTER (lang(?story) = "en")
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:55:45,837 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In the end, it was a combination of international pressure, diplomatic efforts, and the determinatio...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:56:12,263 - __main__ - INFO - Generated part 2 using qwen2.5-7b: It was a day like any other in the small Ukrainian village of Pavlohrad. The children were playing i...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:56:12,320 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:56:15,310 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-28 15:56:15,324 - __main__ - INFO - Generated SPARQL query: 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+SELECT ?event ?description ?date ?location
+WHERE {
+  ?event a dbo:Event;
+         dbo:abstract ?description;
+         dbo:date ?date;
+         dbo:location ?location.
+  FILTER (CONTAINS(LCASE(?description), "historic climate agreement") || CONTAINS(LCASE(?description), "global energy shift"))
+  FILTER (LANG(?description) = 'en')
+}
+
+LIMIT 10
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:57:13,780 - __main__ - INFO - Generated part 1 using qwen2.5-7b: In the year 2030, the world was on the brink of a major shift in its energy landscape. The Paris Cli...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:57:29,247 - __main__ - INFO - Generated part 2 using qwen2.5-7b: The world was on the brink of a major climate crisis. The effects of global warming were becoming in...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+2025-04-28 15:57:29,302 - __main__ - INFO - Generated part 3 using qwen2.5-7b: ...
+Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
