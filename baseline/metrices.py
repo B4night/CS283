@@ -77,17 +77,17 @@ def get_score(prompt: str) -> str:
 
 if __name__ == "__main__":
     dirs = ['ds-8b', 'llama', 'qwen']
-    
-    
+
     for dire in dirs:
         sub_dirs = os.listdir(f'{dire}')
-        
-        baseline_dir = sub_dirs[0] if len(sub_dirs[0]) > len(sub_dirs[1]) else sub_dirs[1]
+
+        baseline_dir = sub_dirs[0] if len(
+            sub_dirs[0]) > len(sub_dirs[1]) else sub_dirs[1]
         new_dir = sub_dirs[1] if baseline_dir == sub_dirs[0] else sub_dirs[0]
-        
+
         baseline_dir = f'./{dire}/{baseline_dir}'
         new_dir = f'./{dire}/{new_dir}'
-        
+
         baseline_stories = []
         for file in os.listdir(f'{baseline_dir}'):
             with open(f'{baseline_dir}/{file}', 'r') as f:
@@ -98,7 +98,7 @@ if __name__ == "__main__":
                 baseline_stories.append(story)
             with open(f'{baseline_dir}/{file}.score', 'w') as f:
                 f.write(response)
-            break
+            # break
 
         print(f'Metrics for {baseline_dir}')
         evaluate_distinct(baseline_stories)
@@ -114,7 +114,7 @@ if __name__ == "__main__":
                 new_stories.append(story)
             with open(f'{new_dir}/{file}.score', 'w') as f:
                 f.write(response)
-            break
+            # break
 
         print(f'Metrics for {new_dir}')
         evaluate_distinct(new_stories)
